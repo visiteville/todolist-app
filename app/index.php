@@ -42,23 +42,31 @@ try {
 <head>
     <title>TodoList</title>
     <meta charset="UTF-8">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Ma TodoList</h1>
-    
-    <?php if (isset($message)): ?>
-        <p><?= $message ?></p>
-    <?php endif; ?>
-    
-    <form method="POST">
-        <input type="text" name="task" placeholder="Nouvelle tâche" required>
-        <button type="submit">Ajouter</button>
-    </form>
-    
-    <ul>
-        <?php foreach ($tasks as $task): ?>
-            <li><?= htmlspecialchars($task['task']) ?></li>
-        <?php endforeach; ?>
-    </ul>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="mb-4 text-center">Ma TodoList</h1>
+
+        <?php if (isset($message)): ?>
+            <div class="alert alert-info"><?= htmlspecialchars($message) ?></div>
+        <?php endif; ?>
+
+        <form method="POST" class="d-flex mb-4">
+            <input type="text" name="task" class="form-control me-2" placeholder="Nouvelle tâche" required>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+
+        <ul class="list-group">
+            <?php foreach ($tasks as $task): ?>
+                <li class="list-group-item"><?= htmlspecialchars($task['task']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS (optionnel, pour certains composants) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
