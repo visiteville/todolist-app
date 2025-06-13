@@ -1,5 +1,8 @@
+ version: '3.8'
+
 services:
   web:
+    container_name: web-app
     build: 
       context: ./app
       dockerfile: Dockerfile
@@ -14,8 +17,12 @@ services:
       - todonet
     environment:
       - DB_HOST=db
+      - DB_NAME=tododb
+      - DB_USER=todo
+      - DB_PASSWORD=todopass
 
   db:
+    container_name: mysql-db
     image: mysql:8.0
     restart: always
     environment:
@@ -40,3 +47,8 @@ volumes:
 networks:
   todonet:
     driver: bridge
+
+
+  
+
+ 
