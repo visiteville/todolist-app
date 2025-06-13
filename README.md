@@ -18,6 +18,7 @@ Cette application est une TodoList simple développée en PHP avec une base de d
 sh
 
 git clone https://github.com/visiteville/todolist-app.git
+
 cd todolist-app
 
 2. Démarrer les conteneurs
