@@ -12,6 +12,7 @@ try {
     if ($conn->connect_error) {
         throw new Exception("Connexion failed: " . $conn->connect_error);
     }
+<<<<<<< HEAD
 
     // Ajouter une tâche
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task']) && empty($_POST['id'])) {
@@ -53,10 +54,29 @@ try {
         $stmt->close();
     }
 
+=======
+    
+    // Traitement du formulaire
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['task'])) {
+        $task = htmlspecialchars($_POST['task']);
+        
+        $stmt = $conn->prepare("INSERT INTO taches (task) VALUES (?)");
+        $stmt->bind_param("s", $task);
+        
+        if ($stmt->execute()) {
+            $message = "Tâche ajoutée avec succès!";
+        } else {
+            $message = "Error: " . $stmt->error;
+        }
+        $stmt->close();
+    }
+    
+>>>>>>> infrastructure
     // Récupérer les tâches
     $result = $conn->query("SELECT * FROM taches ORDER BY created_at DESC");
     $tasks = $result->fetch_all(MYSQLI_ASSOC);
     
+<<<<<<< HEAD
     // Si on est en train d’éditer une tâche
     $editTask = null;
     if (isset($_GET['edit'])) {
@@ -69,13 +89,18 @@ try {
         $stmt->close();
     }
 
+=======
+>>>>>>> infrastructure
     $conn->close();
 } catch (Exception $e) {
     die("Database error: " . $e->getMessage());
 }
 ?>
+<<<<<<< HEAD
 
 ?>
+=======
+>>>>>>> infrastructure
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,15 +119,21 @@ try {
         <?php endif; ?>
 
         <form method="POST" class="d-flex mb-4">
+<<<<<<< HEAD
             <input type="hidden" name="id" value="<?= $editTask['id'] ?? '' ?>">
             <input type="text" name="task" class="form-control me-2" placeholder="Nouvelle tâche" required value="<?= $editTask['task'] ?? '' ?>">
             <button type="submit" class="btn btn-<?= isset($editTask) ? 'warning' : 'primary' ?>">
                 <?= isset($editTask) ? 'Modifier' : 'Ajouter' ?>
             </button>
+=======
+            <input type="text" name="task" class="form-control me-2" placeholder="Nouvelle tâche" required>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+>>>>>>> infrastructure
         </form>
 
         <ul class="list-group">
             <?php foreach ($tasks as $task): ?>
+<<<<<<< HEAD
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <?= htmlspecialchars($task['task']) ?>
                     <div>
@@ -113,6 +144,11 @@ try {
             <?php endforeach; ?>
         </ul>
 
+=======
+                <li class="list-group-item"><?= htmlspecialchars($task['task']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+>>>>>>> infrastructure
     </div>
 
     <!-- Bootstrap JS (optionnel, pour certains composants) -->
